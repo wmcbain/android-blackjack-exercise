@@ -1,0 +1,121 @@
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".BlackJack"
+    android:id="@+id/tableLayout"
+    android:focusable="false"
+    android:stretchColumns="0,1,2,3"
+    android:background="@color/game_green">
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/tableRow0"
+        android:background="@color/title_bg_color">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/app_name"
+            android:id="@+id/titleTextView"
+            android:layout_column="0"
+            android:layout_span="3"
+            android:layout_gravity="center"
+            android:textSize="@dimen/title_size"
+            android:textColor="@color/title_text_color"
+            android:padding="5dp" />
+
+    </TableRow>
+
+    <TableRow
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/tableRow1">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/dealer"
+            android:id="@+id/dealerTextView"
+            android:layout_column="0"
+            android:layout_span="3"
+            android:layout_gravity="center"
+            android:paddingTop="15dp"
+            android:textColor="@color/player_text_color"
+            android:textSize="@dimen/text_size" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/tableRow2"
+        android:layout_weight="1">
+
+        <HorizontalScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/dealerCardsScrollView"
+            android:layout_column="0"
+            android:layout_span="3" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/tableRow3"
+        android:layout_weight="0"
+        android:padding="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New Text"
+            android:id="@+id/notificationTextView"
+            android:layout_column="0"
+            android:layout_span="3"
+            android:layout_gravity="center"
+            android:textSize="@dimen/text_size"
+            android:textColor="@color/notification_text_color" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/tableRow4"
+        android:layout_weight="1">
+
+        <HorizontalScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/playerCardsScrollView"
+            android:layout_column="0"
+            android:layout_span="3" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/tableRow5">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/new_game"
+            android:id="@+id/newGameButton"
+            android:textSize="@dimen/button_text_size" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/hit"
+            android:id="@+id/hitButton"
+            android:textSize="@dimen/button_text_size" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/stay"
+            android:id="@+id/stayButton"
+            android:textSize="@dimen/button_text_size" />
+    </TableRow>
+</TableLayout>
