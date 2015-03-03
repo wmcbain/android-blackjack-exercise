@@ -25,11 +25,28 @@ public class Card {
     }
 
     /**
+     * Gets the card path for the image
+     * @return the card path
+     */
+    public String getCardPath() {
+        return cardPath;
+    }
+
+
+    /**
      * Gets the card value
      * @return the card value
      */
     public int getValue() {
         return value;
+    }
+
+    /**
+     * Sets the card path
+     * @param cardPath the path of the card
+     */
+    public void setCardPath(String cardPath) {
+        this.cardPath = cardPath;
     }
 
     /**
@@ -39,6 +56,5 @@ public class Card {
     public void setValue(int value) {
         this.value = value;
     }
-
 
 }

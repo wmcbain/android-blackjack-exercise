@@ -16,4 +16,32 @@
         android:id="@+id/cardImageView1"
         android:layout_gravity="center"
         android:layout_column="2" />
+
+    <ImageView
+        android:layout_width="@dimen/card_width"
+        android:layout_height="@dimen/card_height"
+        android:id="@+id/cardImageView2"
+        android:layout_gravity="center"
+        android:layout_column="3" />
+
+    <ImageView
+        android:layout_width="@dimen/card_width"
+        android:layout_height="@dimen/card_height"
+        android:id="@+id/cardImageView3"
+        android:layout_gravity="center"
+        android:layout_column="4" />
+
+    <ImageView
+        android:layout_width="@dimen/card_width"
+        android:layout_height="@dimen/card_height"
+        android:id="@+id/cardImageView4"
+        android:layout_gravity="center"
+        android:layout_column="5" />
+
+    <ImageView
+        android:layout_width="@dimen/card_width"
+        android:layout_height="@dimen/card_height"
+        android:id="@+id/cardImageView5"
+        android:layout_gravity="center"
+        android:layout_column="6" />
 </TableRow>
