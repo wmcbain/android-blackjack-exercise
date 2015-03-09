@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.app.Activity;
+import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -21,15 +22,13 @@ public class BlackJack extends ActionBarActivity implements View.OnClickListener
     private TextView titleTextView;
     private TableRow tableRow1;
     private TextView dealerTextView;
-    private TableRow tableRow2;
     private HorizontalScrollView dealerCardsScrollView;
-    private TableRow tableRow3;
     private TextView notificationTextView;
-    private TableRow tableRow4;
     private HorizontalScrollView playerCardsScrollView;
     private TableRow tableRow5;
     private Gameplay gp;
     private View playersCardsView, dealersCardsView;
+    private LinearLayout boardLinearLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,15 +36,13 @@ public class BlackJack extends ActionBarActivity implements View.OnClickListener
         setContentView(R.layout.activity_black_jack);
 
         tableLayout = (TableLayout) findViewById(R.id.tableLayout);
+        boardLinearLayout = (LinearLayout) findViewById(R.id.boardLinearLayout);
         tableRow0 = (TableRow) findViewById(R.id.tableRow0);
-        titleTextView = (TextView) findViewById(R.id.titleTextView);
+        titleTextView = (TextView) boardLinearLayout.findViewById(R.id.titleTextView);
         tableRow1 = (TableRow) findViewById(R.id.tableRow1);
         dealerTextView = (TextView) findViewById(R.id.dealerTextView);
-        tableRow2 = (TableRow) findViewById(R.id.tableRow2);
         dealerCardsScrollView = (HorizontalScrollView) findViewById(R.id.dealerCardsScrollView);
-        tableRow3 = (TableRow) findViewById(R.id.tableRow3);
         notificationTextView = (TextView) findViewById(R.id.notificationTextView);
-        tableRow4 = (TableRow) findViewById(R.id.tableRow4);
         playerCardsScrollView = (HorizontalScrollView) findViewById(R.id.playerCardsScrollView);
         tableRow5 = (TableRow) findViewById(R.id.tableRow5);
         findViewById(R.id.newGameButton).setOnClickListener(this);
@@ -53,10 +50,12 @@ public class BlackJack extends ActionBarActivity implements View.OnClickListener
         findViewById(R.id.stayButton).setOnClickListener(this);
 
         LayoutInflater inf = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        playersCardsView = inf.inflate(R.layout.card_layout, null);
-        dealersCardsView = inf.inflate(R.layout.card_layout, null);
+        playersCardsView = inf.inflate(R.layout.card_view, null);
+        dealersCardsView = inf.inflate(R.layout.card_view, null);
+        dealerCardsScrollView.addView(dealersCardsView);
+        playerCardsScrollView.addView(playersCardsView);
 
-        gp = new Gameplay(this.getApplicationContext(), dealersCardsView, playersCardsView);
+        gp = new Gameplay(this.getApplicationContext(), playersCardsView, dealersCardsView, notificationTextView);
     }
 
     @Override

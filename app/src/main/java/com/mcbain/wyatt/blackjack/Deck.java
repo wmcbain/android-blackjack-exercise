@@ -71,10 +71,10 @@ public class Deck {
 
             for (int i = 0; i < files.length; i++) { // iterate through files
                 int delim = files[i].indexOf("_");
-                if (delim == -1) placeholder = new Card(0, files[i]); // back card
+                if (delim == -1) placeholder = new Card(0, files[i].replace(".png", "")); // back card
                 else {
                     // get value association for card, put it in the deck
-                    card = new Card(valueAssociations.get(files[i].substring(0, delim)), files[i]);
+                    card = new Card(valueAssociations.get(files[i].substring(0, delim)), files[i].replace(".png", ""));
                     deck.put(i, card);
                 }
             }
@@ -89,7 +89,7 @@ public class Deck {
      */
     private void createValueAssociations() {
         valueAssociations = new HashMap<String, Integer>();
-        int[] values = {11,10,9,8,7,6,5,4,3,2};
+        int[] values = {11,10,10,10,10,9,8,7,6,5,4,3,2};
         String[] tokens = {"A","K","Q","J","10","9","8","7","6","5","4","3","2"};
 
         for (int i = 0; i < values.length; i++) { // iterate through arrays and add to map

@@ -2,24 +2,32 @@ package com.mcbain.wyatt.blackjack;
 
 import android.content.Context;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import android.content.res.AssetManager;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
+import android.nfc.Tag;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
-
-import com.mcbain.wyatt.blackjack.R;
+import android.widget.TextView;
 
 /**
  * Created by wyattmcbain on 3/1/15.
  */
 public class Gameplay {
+    private static final String TAG = "Blackjack Activity";
+    private Context context;
     private Deck deck;
     private List playersCards, dealersCards;
     private View playersCardsView, dealersCardsView;
+    private TextView notificationTextView;
     private int playersCardsCnt, dealersCardsCnt;
     private final int[] imageViews = {R.id.cardImageView0, R.id.cardImageView1,
         R.id.cardImageView2, R.id.cardImageView3, R.id.cardImageView4, R.id.cardImageView5};
@@ -28,10 +36,12 @@ public class Gameplay {
      * Default constructor
      * @param context The application's context
      */
-    public Gameplay(Context context, View playersCardsView, View dealersCardsView) {
+    public Gameplay(Context context, View playersCardsView, View dealersCardsView, TextView notificationTextView) {
+        this.context = context;
         this.deck = new Deck(context);
         this.playersCardsView = playersCardsView;
         this.dealersCardsView = dealersCardsView;
+        this.notificationTextView = notificationTextView;
     }
 
     /**
@@ -43,7 +53,7 @@ public class Gameplay {
         addCardToPlayerLayout(temp);
         // check for bust
         if(isBust(getCardTotals(playersCards))) {
-            // display bust message
+            notificationTextView.setText(context.getResources().getString(R.string.player_bust));
             clearHands();
         }
     }
@@ -74,7 +84,7 @@ public class Gameplay {
      */
     private void addCardToDealerLayout(Card card) {
         ImageView view = (ImageView)dealersCardsView.findViewById(imageViews[dealersCardsCnt]);
-        view.setImageBitmap(BitmapFactory.decodeFile(card.getCardPath()));
+        view.setImageDrawable(getCardImage(card.getCardPath()));
         dealersCardsCnt++;
     }
 
@@ -84,7 +94,7 @@ public class Gameplay {
      */
     private void addCardToPlayerLayout(Card card) {
         ImageView view = (ImageView)playersCardsView.findViewById(imageViews[playersCardsCnt]);
-        view.setImageBitmap(BitmapFactory.decodeFile(card.getCardPath()));
+        view.setImageDrawable(getCardImage(card.getCardPath()));
         playersCardsCnt++;
     }
 
@@ -111,7 +121,7 @@ public class Gameplay {
                 addCardToDealerLayout(temp);
                 // check for dealer bust
                 if (isBust(getCardTotals(dealersCards))) {
-                    // display bust message
+                    notificationTextView.setText(context.getResources().getString(R.string.dealer_bust));
                     clearHands();
                     break;
                 }
@@ -142,7 +152,7 @@ public class Gameplay {
         // check for player blackjack
         int[] totals = getCardTotals(playersCards);
         if (totals[0] == 21 || totals[1] == 21) {
-            // display blackjack message
+            notificationTextView.setText(context.getResources().getString(R.string.blackjack_alert));
             clearHands();
         }
     }
@@ -154,11 +164,11 @@ public class Gameplay {
      */
     private void determineWinner(int[] dealerTotals, int[] playerTotals) {
         if (getBest(dealerTotals) > getBest(playerTotals)) {
-            // display dealer winner
+            notificationTextView.setText(context.getResources().getString(R.string.dealer_won));
             clearHands();
             return;
         }
-        // display player winner
+        notificationTextView.setText(context.getResources().getString(R.string.player_won));
         clearHands();
     }
 
@@ -194,6 +204,25 @@ public class Gameplay {
     }
 
     /**
+     * Gets the card image
+     * @param filePath
+     * @return
+     */
+    public Drawable getCardImage(String filePath) {
+        InputStream is;
+        AssetManager assets = context.getAssets();
+
+        try {
+            is = assets.open("cards/" + filePath + ".png");
+            Drawable card = Drawable.createFromStream(is, filePath);
+            return card;
+        } catch (IOException ioe) {
+            Log.e(TAG, "Error loading " + filePath, ioe);
+        }
+        return null;
+    }
+
+    /**
      * Determines if hand is a bust
      * @param totals the two totals
      * @return true/false
@@ -216,11 +245,17 @@ public class Gameplay {
     /**
      * Task to be run when cards need to be cleared
      */
-    private class ClearTask extends TimerTask {
+    class ClearTask extends TimerTask {
         public void run() {
             playersCards.clear();
             dealersCards.clear();
-            // remove cards from GUI and what not
+            notificationTextView.setText("");
+            for (int i = 0; i < imageViews.length; i++) { // remove images from image views
+                ImageView piv = (ImageView)playersCardsView.findViewById(imageViews[i]);
+                ImageView div = (ImageView)dealersCardsView.findViewById(imageViews[i]);
+                piv.setImageResource(0);
+                div.setImageResource(0);
+            }
             dealInitialCards();
         }
     }

@@ -1,47 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TableRow xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/game_green">
 
     <ImageView
         android:layout_width="@dimen/card_width"
         android:layout_height="@dimen/card_height"
         android:id="@+id/cardImageView0"
         android:layout_gravity="center"
-        android:layout_column="1" />
+        android:layout_margin="5dp" />
 
     <ImageView
         android:layout_width="@dimen/card_width"
         android:layout_height="@dimen/card_height"
         android:id="@+id/cardImageView1"
         android:layout_gravity="center"
-        android:layout_column="2" />
+        android:layout_margin="5dp" />
 
     <ImageView
         android:layout_width="@dimen/card_width"
         android:layout_height="@dimen/card_height"
         android:id="@+id/cardImageView2"
         android:layout_gravity="center"
-        android:layout_column="3" />
+        android:layout_margin="5dp" />
 
     <ImageView
         android:layout_width="@dimen/card_width"
         android:layout_height="@dimen/card_height"
         android:id="@+id/cardImageView3"
         android:layout_gravity="center"
-        android:layout_column="4" />
+        android:layout_margin="5dp" />
 
     <ImageView
         android:layout_width="@dimen/card_width"
         android:layout_height="@dimen/card_height"
         android:id="@+id/cardImageView4"
         android:layout_gravity="center"
-        android:layout_column="5" />
+        android:layout_margin="5dp" />
 
     <ImageView
         android:layout_width="@dimen/card_width"
         android:layout_height="@dimen/card_height"
         android:id="@+id/cardImageView5"
         android:layout_gravity="center"
-        android:layout_column="6" />
-</TableRow>
+        android:layout_margin="5dp" />
+
+</LinearLayout>
